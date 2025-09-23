@@ -14,7 +14,7 @@ questions = [
 def main():
     webhook_url = os.environ["SLACK_WEBHOOK_URL"]
 
-    # Huidige datum
+    # Current date
     today = datetime.date.today()
 
     day_of_year = today.timetuple().tm_yday 
@@ -22,7 +22,7 @@ def main():
     question_index = (day_of_year - 1) % len(questions)
     question_of_the_day = questions[question_index]
 
-    message = f"📚 **Boekje open doen!**\n\nVandaag's vraag: {question_of_the_day}"
+    message = f"📚 Boekje open! Het boekje van vandaag is... 📖\n\n🎤 {question_of_the_day}"
 
     payload = {
         "text": message
