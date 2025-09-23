@@ -1,4 +1,4 @@
-name: Daily Slack Reminder
+name: Boekje Open Bot
 
 on:
   schedule:
