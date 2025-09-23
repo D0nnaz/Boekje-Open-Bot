@@ -1,0 +1,27 @@
+name: Daily Slack Reminder
+
+on:
+  schedule:
+    - cron: '30 13 * 3-10 1-5'   # maart–oktober → 13:25 UTC = 15:25 NL
+    - cron: '30 14 * 1,2,11,12 1-5' # nov–feb → 14:25 UTC = 15:25 NL
+  workflow_dispatch:
+jobs:
+  slack-message:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v3
+
+      - name: Python installeren
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Dependencies installeren
+        run: pip install requests
+
+      - name: Slackbericht versturen
+        run: python send_slack_message.py
