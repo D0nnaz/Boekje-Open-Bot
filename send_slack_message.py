@@ -4,11 +4,16 @@ import json
 import requests
 
 questions = [
-    "Wat is je favoriete vakantieherinnering?",
-    "Wat is het mooiste boek dat je ooit hebt gelezen?",
-    "Als je elke superkracht zou kunnen hebben, welke zou je kiezen?",
-    "Wat is de beste beslissing die je ooit hebt genomen?",
-    "Welke hobby zou je graag willen oppakken als je de tijd had?",
+    "Wat is de grootste geheim die je ooit hebt moeten bewaren?",
+    "Wat zou je doen als je morgen onbegrensd rijk zou zijn, maar niemand je zou geloven?",
+    "Als je één moment in je leven opnieuw zou kunnen beleven, welk moment zou dat dan zijn en waarom?",
+    "Wat is het vreemdste of spannendste dat je ooit hebt gedaan zonder dat iemand het weet?",
+    "Heb je ooit iemand bedrogen, zelfs als het voor iets kleins was? Hoe voelde dat?",
+    "Wat is je grootste angst die je voor niemand hebt gedeeld?",
+    "Als je je leven opnieuw zou kunnen beginnen, maar met alle kennis die je nu hebt, wat zou je dan totaal anders doen?",
+    "Wat is de grootste misstap die je ooit hebt begaan en heb je daar ooit spijt van gehad?",
+    "Welke persoon in je leven zou je nooit willen verliezen, en waarom?",
+    "Als je onzichtbaar zou zijn voor één dag, wat zou je dan doen?"
 ]
 
 def main():
