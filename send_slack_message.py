@@ -1,5 +1,4 @@
 import os
-import datetime
 import json
 import requests
 
@@ -16,33 +15,31 @@ questions = [
     "Als je onzichtbaar zou zijn voor één dag, wat zou je dan doen?"
 ]
 
+def load_last_question_index():
+    try:
+        with open('last_question_index.txt', 'r') as file:
+            index = int(file.read().strip())
+    except FileNotFoundError:
+        index = 0
+    return index
+
+def save_last_question_index(index):
+    with open('last_question_index.txt', 'w') as file:
+        file.write(str(index))
+
 def main():
     webhook_url = os.environ["SLACK_WEBHOOK_URL"]
-
-    # Current date
-    today = datetime.date.today()
-
-    day_of_year = today.timetuple().tm_yday 
-    
-    question_index = (day_of_year - 1) % len(questions)
-    question_of_the_day = questions[question_index]
-
+    last_index = load_last_question_index()
+    question_of_the_day = questions[last_index]
     message = f"📚 Boekje open! Het boekje van vandaag is... 📖\n\n🎤 {question_of_the_day}"
-
-    payload = {
-        "text": message
-    }
-
-    response = requests.post(
-        webhook_url,
-        data=json.dumps(payload),
-        headers={'Content-Type': 'application/json'}
-    )
-
+    payload = {"text": message}
+    response = requests.post(webhook_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
     if response.status_code != 200:
         raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
     else:
         print("✅ Vraag succesvol verzonden via webhook")
+    next_index = (last_index + 1) % len(questions)
+    save_last_question_index(next_index)
 
 if __name__ == "__main__":
     main()
