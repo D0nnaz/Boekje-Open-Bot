@@ -32,12 +32,18 @@ def main():
     last_index = load_last_question_index()
     question_of_the_day = questions[last_index]
     message = f"📚 Boekje open! Het boekje van vandaag is... 📖\n\n🎤 {question_of_the_day}"
+    
+    if last_index == len(questions) - 1:
+        message += "\n\n⚠️ DE VRAGEN ZIJN OP!"
+
     payload = {"text": message}
     response = requests.post(webhook_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
+    
     if response.status_code != 200:
         raise Exception(f"Slack webhook failed: {response.status_code}, {response.text}")
     else:
         print("✅ Vraag succesvol verzonden via webhook")
+    
     next_index = (last_index + 1) % len(questions)
     save_last_question_index(next_index)
 
