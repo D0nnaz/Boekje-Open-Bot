@@ -65,7 +65,7 @@ def main():
     message = (
         "📚 *Boekje open!* Het boekje van vandaag is… 📖\n\n"
         f"🎤 {q}\n\n"
-        f"_Vraag #{idx + 1} van {len(questions)}_"
+        f"> Vraag #{idx + 1} van {len(questions)}"
     )
     post_to_slack(webhook_url, message)
     print(f"✅ Verzonden: vraag {idx + 1}/{len(questions)} (anchor: {anchor.isoformat()})")
